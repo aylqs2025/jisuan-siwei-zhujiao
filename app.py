@@ -20,8 +20,18 @@ import streamlit as st
 
 from 匹配 import 载入, 找报错, 判断把握, 找知识点, 所有知识点
 
+BASE = os.path.dirname(os.path.abspath(__file__))
+TOU_XIANG = os.path.join(BASE, 'xiaoli_头像.png')      # 标签页图标 + 页首
+BAN_SHEN = os.path.join(BASE, 'xiaoli_半身.png')       # 侧栏
+
+
+def _tu(p, beiyong='🙋'):
+    """图在就用图，不在就用 emoji —— 少一个文件不至于整个应用崩掉。"""
+    return p if os.path.exists(p) else beiyong
+
+
 st.set_page_config(page_title='助教小莉 · 计算思维答疑',
-                   page_icon='🙋', layout='centered')
+                   page_icon=_tu(TOU_XIANG), layout='centered')
 
 st.markdown("""
 <style>
@@ -44,13 +54,23 @@ def kb():
 
 K = kb()
 
-st.title('🙋 助教小莉')
-st.markdown('<span class="gr">上外贤达《计算思维》· 课程答疑　｜　'
-            '知识库 %s　覆盖第 %s 章</span>'
-            % (K['版本'], '、'.join(str(x) for x in K['覆盖章节'])),
-            unsafe_allow_html=True)
+h1, h2 = st.columns([1, 5], vertical_alignment='center')
+with h1:
+    if os.path.exists(TOU_XIANG):
+        st.image(TOU_XIANG, width=96)
+    else:
+        st.markdown('<div style="font-size:64px">🙋</div>',
+                    unsafe_allow_html=True)
+with h2:
+    st.title('助教小莉')
+    st.markdown('<span class="gr">上外贤达《计算思维》· 课程答疑　｜　'
+                '知识库 %s　覆盖第 %s 章</span>'
+                % (K['版本'], '、'.join(str(x) for x in K['覆盖章节'])),
+                unsafe_allow_html=True)
 
 with st.sidebar:
+    if os.path.exists(BAN_SHEN):
+        st.image(BAN_SHEN, use_container_width=True)
     st.header('我能答什么')
     st.markdown("""
 **能答**
