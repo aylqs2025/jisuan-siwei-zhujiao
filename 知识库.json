@@ -13,9 +13,9 @@
     },
     {
       "症状": "ModuleNotFoundError: No module named 'edge_tts'",
-      "做法": "语音库没装。回到第 4 步 ③。",
-      "来源": "Mac版安装说明.txt",
-      "平台": "Mac"
+      "做法": "语音库没装，回到第 3 步。 如果你确定装过、当时也出现了 Successfully installed， 那多半是装错了地方——你用的是系统的命令行窗口， 不是 PyCharm 最下面那个 Terminal。两边装的位置不一样。 回到 PyCharm，用它自己的 Terminal 再装一次就好。",
+      "来源": "使用说明.txt",
+      "平台": "通用"
     },
     {
       "症状": "IndentationError: unexpected indent",
@@ -37,19 +37,19 @@
     },
     {
       "症状": "SyntaxError: invalid character",
-      "做法": "把英文标点写成中文标点了。 检查引号是不是写成了 “ ” ，括号是不是写成了 （ ）。 代码里的标点，全部要用英文半角。 这一条 Mac 和 Windows 完全一样。",
-      "来源": "Mac版安装说明.txt",
-      "平台": "Mac"
+      "做法": "把英文标点写成中文标点了。 检查引号是不是写成了 “ ” ，括号是不是写成了 （ ）。 代码里的标点，全部要用英文半角。",
+      "来源": "使用说明.txt",
+      "平台": "通用"
     },
     {
       "症状": "运行了但是没声音",
-      "做法": "① 右上角音量是不是静音了 ② 是不是插着耳机 ③ 屏幕上有没有 [语音] 开头的提示，照着提示做 程序会告诉你 mp3 存在哪，双击一样能听 —— 没声音不影响交作业，不影响成绩。",
-      "来源": "Mac版安装说明.txt",
-      "平台": "Mac"
+      "做法": "① 电脑是不是静音了？先放段音乐试试 ② 插着耳机吗？拔掉再试 ③ 屏幕上有没有出现 [语音] 开头的提示？照着提示做",
+      "来源": "使用说明.txt",
+      "平台": "通用"
     },
     {
       "症状": "CERTIFICATE_VERIFY_FAILED",
-      "做法": "第 2 步那个 Install Certificates.command 没有双击。 回到 应用程序 → Python 3.12 文件夹，双击它，再运行。 这是 Mac 同学最常见的问题，没有之一。",
+      "做法": "第 2 步那个 Install Certificates.command 没有双击。 打开 应用程序（Applications），找到那个 Python 3.x 文件夹 （x 是你装的版本号），进去双击它，再运行。 这是 Mac 同学最常见的问题，没有之一。",
       "来源": "Mac版安装说明.txt",
       "平台": "Mac"
     },
@@ -74,6 +74,48 @@
     {
       "症状": "\"无法打开，因为无法验证开发者\"",
       "做法": "系统设置 → 隐私与安全性 → 往下拉 → 仍要打开",
+      "来源": "Mac版安装说明.txt",
+      "平台": "Mac"
+    },
+    {
+      "症状": "ModuleNotFoundError: No module named 'yuyin'",
+      "做法": "你没有打开整个文件夹，或者把文件挪走了。回到第 4 步 ②。",
+      "来源": "Mac版安装说明.txt",
+      "平台": "Mac"
+    },
+    {
+      "症状": "ModuleNotFoundError: No module named 'edge_tts'",
+      "做法": "语音库没装，回到第 4 步 ③。 如果你确定装过、当时也出现了 Successfully installed， 那多半是装错了地方——你用的是系统的\"终端\"应用， 不是 PyCharm 最下面那个 Terminal。两边装的位置不一样。 回到 PyCharm，用它自己的 Terminal 再装一次就好。",
+      "来源": "Mac版安装说明.txt",
+      "平台": "Mac"
+    },
+    {
+      "症状": "NameError: name 'speak' is not defined",
+      "做法": "你没写 from yuyin import speak 那一行，或者把它注释掉了。 （和上面那个 ModuleNotFoundError 区分： 这个是\"没告诉 Python 去哪儿找\"，那个是\"根本没装\"。）",
+      "来源": "Mac版安装说明.txt",
+      "平台": "Mac"
+    },
+    {
+      "症状": "IndentationError: unexpected indent",
+      "做法": "这一行前面多了空格。每一行都顶格写。",
+      "来源": "Mac版安装说明.txt",
+      "平台": "Mac"
+    },
+    {
+      "症状": "SyntaxError: invalid non-printable character U+3000",
+      "做法": "你打的空格是中文输入法下的全角空格。切回英文输入法。",
+      "来源": "Mac版安装说明.txt",
+      "平台": "Mac"
+    },
+    {
+      "症状": "SyntaxError: invalid character",
+      "做法": "把英文标点写成中文标点了。 检查引号是不是写成了 “ ” ，括号是不是写成了 （ ）。 代码里的标点，全部要用英文半角。 这一条 Mac 和 Windows 完全一样。",
+      "来源": "Mac版安装说明.txt",
+      "平台": "Mac"
+    },
+    {
+      "症状": "运行了但是没声音",
+      "做法": "① 右上角音量是不是静音了 ② 是不是插着耳机 ③ 屏幕上有没有 [语音] 开头的提示，照着提示做 程序会告诉你 mp3 存在哪，双击一样能听 —— 没声音不影响交作业，不影响成绩。",
       "来源": "Mac版安装说明.txt",
       "平台": "Mac"
     }

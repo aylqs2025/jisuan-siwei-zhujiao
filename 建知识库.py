@@ -158,10 +158,14 @@ def main():
     baocuo = jie_baocuo(p_tong, '使用说明.txt', '通用')
     baocuo += jie_baocuo(p_mac, 'Mac版安装说明.txt', 'Mac')
 
-    # 去重：同一个症状两份文件都写了，留信息多的那份
+    # 去重：同一份说明里重复写的，留信息多的那份。
+    # 注意按“症状 + 平台”去重，不能只按症状 ——
+    # 同一个报错在两份说明里的处理办法不一样（Windows 说“回到第 3 步”，
+    # Mac 说“回到第 4 步 ③”），只按症状去重会让一个平台的学生拿到
+    # 另一个平台的步骤号。两条都留着，由匹配时的平台判断来选。
     m = {}
     for c in baocuo:
-        k = c['症状']
+        k = (c['症状'], c['平台'])
         if k not in m or len(c['做法']) > len(m[k]['做法']):
             m[k] = c
     baocuo = list(m.values())
