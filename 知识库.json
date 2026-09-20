@@ -13,7 +13,7 @@
     },
     {
       "症状": "ModuleNotFoundError: No module named 'edge_tts'",
-      "做法": "语音库没装，回到第 3 步。 如果你确定装过、当时也出现了 Successfully installed， 那多半是装错了地方——你用的是系统的命令行窗口， 不是 PyCharm 最下面那个 Terminal。两边装的位置不一样。 回到 PyCharm，用它自己的 Terminal 再装一次就好。",
+      "做法": "语音库没装，回到第 3 步。 如果你确定装过、当时也出现了 Successfully installed， 那是【装的和跑的不是同一个 Python】。两种情形： 一是你在系统的命令行窗口里装的，不是 PyCharm 最下面 那个 Terminal——两边装的位置不一样； 二是你直接敲了 pip，而这台电脑上不止一个 Python， 那个 pip 属于另一个 Python。 两种情形的解法一样：回到 PyCharm 的 Terminal，敲 python -m pip install edge-tts 还不确定的话，跑一次【诊断.py】，它会直接打印出你这台机器 该用的那一行命令，照抄即可。",
       "来源": "使用说明.txt",
       "平台": "通用"
     },
@@ -67,7 +67,7 @@
     },
     {
       "症状": "permission denied（装库的时候）",
-      "做法": "pip3 install edge-tts --user",
+      "做法": "python3 -m pip install edge-tts --user 出现这个错，通常说明你装到 Mac 自带的那个 Python 上去了—— 系统的 Python 不让随便装东西。加 --user 可以绕过； 但更好的做法是按第 3 步装官网版 Python，并在 PyCharm 里选它。",
       "来源": "Mac版安装说明.txt",
       "平台": "Mac"
     },
@@ -85,7 +85,7 @@
     },
     {
       "症状": "ModuleNotFoundError: No module named 'edge_tts'",
-      "做法": "语音库没装，回到第 4 步 ③。 如果你确定装过、当时也出现了 Successfully installed， 那多半是装错了地方——你用的是系统的\"终端\"应用， 不是 PyCharm 最下面那个 Terminal。两边装的位置不一样。 回到 PyCharm，用它自己的 Terminal 再装一次就好。",
+      "做法": "语音库没装，回到第 4 步 ③。 如果你确定装过、当时也出现了 Successfully installed， 那是【装的和跑的不是同一个 Python】。Mac 上尤其容易碰到， 因为一台机器上常有好几个 python3。两种情形： 一是你在系统的\"终端\"应用里装的，不是 PyCharm 的 Terminal； 二是你直接敲了 pip3，而那个 pip3 属于另一个 Python。 解法一样：回到 PyCharm 的 Terminal，敲 python3 -m pip install edge-tts 还不确定的话，跑一次【诊断.py】，它会直接打印出你这台机器 该用的那一行命令，照抄即可。",
       "来源": "Mac版安装说明.txt",
       "平台": "Mac"
     },
