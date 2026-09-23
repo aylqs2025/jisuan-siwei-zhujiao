@@ -3,10 +3,12 @@
 
     python 建知识库.py
 
-读三样东西：
+读这些东西：
     发给学生/第1周-让电脑说话/使用说明.txt        报错清单（通用）
     发给学生/第1周-让电脑说话/Mac版安装说明.txt    报错清单（Mac）+ 安装步骤
+    发给学生/第2周-我的名字字卡/使用说明.txt       报错清单（第 2 周）
     题库/计算思维-第1章-题库.docx                 49 题，取知识点和解析
+    题库/计算思维-第2章-题库.docx                 50 题，取知识点和解析
 
 生成：
     知识库.json
@@ -90,7 +92,11 @@ def jie_baocuo(path, lai_yuan, ping_tai):
         s = c['症状']
         if not c['做法']:
             continue
-        if re.search(r'[A-Za-z]{4,}', s) or s.startswith('运行了') or s.startswith('"'):
+        # 认三类症状：带英文错误名的、以“运行了”起头的、
+        # 以及程序自己打出来的中文提示（[汉字]…、[语音]…）——
+        # 第 2 周新增的两条就是后一类，只看英文会把它们漏掉。
+        if (re.search(r'[A-Za-z]{4,}', s) or s.startswith('运行了')
+                or s.startswith('"') or s.startswith('[')):
             c['做法'] = ' '.join(c['做法'])
             keep.append(c)
     return keep
@@ -153,10 +159,13 @@ def jie_tiku(path, zhang):
 def main():
     p_tong = os.path.join(BASE, r'发给学生\第1周-让电脑说话\使用说明.txt')
     p_mac = os.path.join(BASE, r'发给学生\第1周-让电脑说话\Mac版安装说明.txt')
+    p_w2 = os.path.join(BASE, r'发给学生\第2周-我的名字字卡\使用说明.txt')
     p_tiku = os.path.join(BASE, r'题库\计算思维-第1章-题库.docx')
+    p_tiku2 = os.path.join(BASE, r'题库\计算思维-第2章-题库.docx')
 
     baocuo = jie_baocuo(p_tong, '使用说明.txt', '通用')
     baocuo += jie_baocuo(p_mac, 'Mac版安装说明.txt', 'Mac')
+    baocuo += jie_baocuo(p_w2, '第2周 使用说明.txt', '通用')
 
     # 去重：同一份说明里重复写的，留信息多的那份。
     # 注意按“症状 + 平台”去重，不能只按症状 ——
@@ -171,11 +180,11 @@ def main():
     baocuo = list(m.values())
 
     buzhou = jie_buzhou(p_tong, 'Windows') + jie_buzhou(p_mac, 'Mac')
-    tiku = jie_tiku(p_tiku, 1)
+    tiku = jie_tiku(p_tiku, 1) + jie_tiku(p_tiku2, 2)
 
     kb = {
-        '版本': '2026-09-17',
-        '覆盖章节': [1],
+        '版本': '2026-09-23',
+        '覆盖章节': [1, 2],
         '说明': '助教知识库。生成物，不要手改；改源材料后重跑 建知识库.py。'
                 '题库部分只含知识点与解析，不含答案。',
         '报错': baocuo,
@@ -193,7 +202,11 @@ def main():
         print('      [%-4s] %s' % (c['平台'], c['症状'][:52]))
     print()
     print('  安装步骤    %2d 步' % len(buzhou))
+    import collections
+    zhang = collections.Counter(t['章'] for t in tiku)
     print('  题库        %2d 题（只取知识点与解析，不含答案）' % len(tiku))
+    for z in sorted(zhang):
+        print('      第 %d 章 %2d 题' % (z, zhang[z]))
     zhi = {}
     for t in tiku:
         for k in t['知识点']:
@@ -202,7 +215,9 @@ def main():
     for k, v in sorted(zhi.items(), key=lambda kv: -kv[1])[:6]:
         print('      %-24s %d 题' % (k, v))
     print()
-    print('  ⚠ 已确认：知识库里不含任何一道题的答案')
+    # 这里原来用了一个警示符号，Windows 的 GBK 命令行编不出来，脚本跑到最后一行崩掉。
+    # 课程材料里反复交代学生“不要用 emoji”，工具自己更不能犯。
+    print('  [检查] 知识库里不含任何一道题的答案')
     leaked = [t for t in tiku if re.search(r'答案[：:]\s*[A-Z对错]', json.dumps(t, ensure_ascii=False))]
     print('     检查结果：%s' % ('发现 %d 处泄漏！' % len(leaked) if leaked else '干净'))
 
